@@ -1,0 +1,55 @@
+# Training - Steps
+total_timesteps:                 # Number of total steps for model training
+num_samples_before_learning:
+num_samples_before_evaluation: 0
+num_eval_episodes: 8
+
+# Training - Frequency
+train_policy_freq: 2
+target_network_update_freq: 1
+report_rollout_freq:
+report_loss_freq:
+save_model_freq:
+eval_freq:                      # 1000 episodes
+train_ir_freq: 16               # Training - Frequency (RND)
+
+# RL - Environment
+sea_size:
+observation_type: state         # state / image
+observation_shape:              # state: [2,] / image: [3, 3, 3]
+action_type: discrete           # discrete / continuous
+action_shape: [2,]
+max_episode_steps:
+
+# RL - Algorithm
+gamma: 0.99                     # Discount factor
+tau: 0.005                      # Update the target
+buffer_size: 100_000            # 300_000 will reduce the performance
+buffer_type: prioritized        # prioritized / random
+buffer_alpha: 0.6               # For prioritized buffer reply
+buffer_init_beta: 0.4           # For prioritized buffer reply
+
+# Network learning
+backbone_type: FC               # FC / CNN
+batch_size: 64
+train_freq: 16                  # Update the model every train_freq steps
+training_intensity: 8           # Number of times for repeat replaying buffer
+actor_learning_rate: 0.0003
+critic_learning_rate: 0.0003
+entropy_learning_rate: 0.0003
+decay_lr: False
+decay_lr_final_scale:           # The total ratio of decay learning rate
+# Network learning (RND)
+ir_learning_rate: 0.0005
+train_intrinsic_intensity: 2
+
+# RL - Intrinsic reward agent
+with_intrinsic_rewards: True
+IR_model: RND                   # RND
+norm_type: run_mean_std         # run_mean_std / batch_min_max
+ir_feat_dim: 16
+ir_clip: 2
+
+# RL - KEA
+switch_threshold: 1                     # Threshold to switch agents
+delay_standard_module_update: True

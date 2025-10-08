@@ -1,0 +1,27 @@
+exp_name: exp_DS30_kea_rnd_sac                    # Experiment name
+
+basic_config: basic_kea_sac.yaml
+
+# Training - Steps
+total_timesteps: 3_000_000             # Number of total steps for model training
+num_samples_before_learning: 6000
+
+# Training - Frequency
+report_rollout_freq: 30000
+report_loss_freq: 30000
+save_model_freq: 3_000_000
+eval_freq: 30000                # 1000 episodes
+
+# Task
+env_id: deep_sea/10         # bsuite/deep_sea-v0
+sea_size: 30
+
+# RL - Agent
+rl_agent: KEA-SAC
+autotune: False
+entropy_alpha: 0.1
+target_entropy: -1.             # dim(A) = 1
+latent_dim: 64
+extrinsic_reward_beta: 30       # Same as `max_episode_steps`
+intrinsic_reward_beta: 0.3
+intrinsic_reward_final:
